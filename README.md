@@ -15,9 +15,8 @@ However, if you get some profit from this or just want to encourage me to contin
 
  - Starring and sharing the projects you like :rocket:
  - [![PayPal][badge_paypal]][paypal-donations] **PayPal**— You can make one-time donations via PayPal. I'll probably buy a ~~coffee~~ tea. :tea:
- - [![Support me on using Brave Browser][badge_brave]][brave] **Brave**— It's free for you. Brave is a browser that improves the security and the access time of websites by blocking ads, trackers and scripts. Give the new Brave Browser a try and Brave will contribute to me on your behalf. :wink:
  - [![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/T6T412CXA) **Ko-fi**— I'll buy a ~~tea~~ coffee. :coffee: :wink:
- - ![](./examples/bitcoin.png) **Bitcoin**—You can send me bitcoins at this address (or scanning the code): `3KDjCmXsGFYawmycXRsVwfFbphog117N8P`
+ - ![](./examples/bitcoin.png) **Bitcoin**—You can send me bitcoins at this address (or scanning the code): `3GqiebqcZeonziRUMYxU35J3jPSMJzpTAc`
  
 
 Thanks! :heart:
@@ -30,7 +29,7 @@ First of all install [Node-RED](http://nodered.org/docs/getting-started/installa
 $ sudo npm install -g node-red
 # Then open  the user data directory  `~/.node-red`  and install the package
 $ cd ~/.node-red
-$ npm install node-red-contrib-template
+$ npm install node-red-contrib-generate-password
 ```
 
 Or search template in the manage palette menu
@@ -45,19 +44,59 @@ node-red
 Have an idea? Found a bug? See [how to contribute][contributing].
 
 ```sh
-git clone https://github.com/naimo84/node-red-contrib-template.git
-cd /path/to/node-red-contrib-template
+git clone https://github.com/naimo84/node-red-contrib-generate-password.git
+cd /path/to/node-red-contrib-generate-password
 npm install
 gulp
 cd ~/.node-red 
-npm install /path/to/node-red-contrib-template
+npm install /path/to/node-red-contrib-generate-password
 ```
 
 ## :memo: Documentation
 
-### node explanation:
 
 
+
+# Password Injector
+
+This node is used to inject a password into the flow.
+
+### Options
+
+```json
+{
+    length: 10,
+    numbers: true,
+    uppercase: false
+}
+```
+
+
+Available options
+
+Any of these can be passed into the options object for each function.
+
+      
+| Name                     | Description                                                           | Default Value |
+|--------------------------|-----------------------------------------------------------------------|---------------|
+| length                   | Integer, length of password.                                          | 10            |
+| numbers*                 | Boolean, put numbers in password.                                     | false         |
+| symbols*                 | Boolean or String, put symbols in password.                           | false         |
+| lowercase*               | Boolean, put lowercase in password                                    | true          |
+| uppercase*               | Boolean, use uppercase letters in password.                           | true          |
+| excludeSimilarCharacters | Boolean, exclude similar chars, like 'i' and 'l'.                     | false         |
+| exclude                  | String, characters to be excluded from password.                      | ''            |
+| strict                   | Boolean, password must include at least one character from each pool. | false         |
+
+### Formated function
+
+<p>
+    The formated function can be used like the standard node-red function node, but with the special feature {{newPassword}}.
+    {{newPassword}} will be replaced with a new generated password.
+</p>
+<p>
+    <img src="https://github.com/naimo84/node-red-contrib-generate-password/raw/master/examples/inject-password.png"/>
+</p>
 
 ## :scroll: The MIT License
 Permission is hereby granted, free of charge, to any person obtaining a copy
