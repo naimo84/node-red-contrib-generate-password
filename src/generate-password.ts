@@ -9,10 +9,13 @@ module.exports = function (RED: Red) {
 
         let node = this;
         this.on('input', (msg) => {
-            let options = JSON.parse(RED.util.evaluateNodeProperty(config.options, config.optionstype, config, msg) || {
+            let configOptions = RED.util.evaluateNodeProperty(config.options !== '' ? config.options : {}, config.optionstype, config, msg);
+
+            let options = JSON.parse(JSON.stringify(configOptions || {
                 length: 10,
                 numbers: true
-            });
+            }));
+         
             var password = generator.generate(options);
             node.send(Object.assign(msg, { payload: password }));
         });
