@@ -15,9 +15,9 @@ module.exports = function (RED: Red) {
 
         this.on('input', (msg, send, done) => {
             const text = RED.util.evaluateNodeProperty(config.text, config.texttype, config, msg);
-            let configOptions = RED.util.evaluateNodeProperty(config.options !== '' ? config.options : {}, config.optionstype, config, msg);
+            let configOptions = RED.util.evaluateNodeProperty(config.options === '' ? "{}" : config.options, config.optionstype, config, msg);
 
-            let options = JSON.parse(JSON.stringify(configOptions || {
+            let options = JSON.parse(JSON.stringify(configOptions?.length || {
                 length: 10,
                 numbers: true
             }));
@@ -57,10 +57,10 @@ module.exports = function (RED: Red) {
         } else {
             try {
                 const reg = /newPassword/g;
-                let result2 = reg.exec(JSON.stringify(text));
+                let result2 = reg.exec(JSON.stringify(text || "{{newPassword}}"));
                 let counter = 0
                 while (result2 && result2[0] !== "") {
-                    text = JSON.stringify(text).replace('newPassword', 'password' + counter)
+                    text = JSON.stringify(text|| "{{newPassword}}").replace('newPassword', 'password' + counter)
                     counter++;
                     result2 = reg.exec(JSON.stringify(text));
                 }
