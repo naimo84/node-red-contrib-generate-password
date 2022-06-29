@@ -36,8 +36,8 @@
   },
   "scripts": {
     "start": "gulp && node-red",
-    "release": "standard-version",
-    "release-minor": "standard-version --release-as minor",
+    "release": "release-it",
+    "release-beta": "release-it -- --ci --increment=prerelease --preReleaseId=beta --github.preRelease",
     "dev": "gulp develop",
     "build": "gulp"
   },
@@ -51,8 +51,8 @@
     "url": "https://paypal.me/NeumannBenjamin"
   },
   "dependencies": {
-    "generate-password": "^1.6.1",
     "debug": "^4.1.1",
+    "generate-password": "^1.6.1",
     "handlebars": "^4.7.6",
     "lodash": "^4.17.15"
   },
@@ -67,12 +67,9 @@
     "gulp-typescript": "^5.0.1",
     "gulp-watch": "^5.0.1",
     "husky": "3.1.0",
-    "mocha": "6.2.2",
     "node-red": "1.0.2",
-    "node-red-node-test-helper": "^0.2.3",
     "nodemon": "^1.19.4",
-    "should": "13.2.3",
-    "standard-version": "^7.1.0",
+    "release-it": "^15.1.1",
     "typescript": "^3.8.2"
   },
   "commitlint": {
